@@ -3,11 +3,34 @@ fn inc(n: &mut isize){
     *n += 1;
 }
 
-fn show(arr: &Vec<&str>, num: &mut isize) {
+fn show(arr: &Vec<String>) {
+    let mut num = 1;
+    println!("Countries list: ");
     for country in arr{
-        println!("Country number {}: {}", *num, country);
-        inc(num);
+        println!("Country number {}: {}", num, country);
+        inc(&mut num);
     }
+}
+
+fn add(arr: &mut Vec<String>) {
+    println!("Enter a country name: ");
+    let mut country = String::new();
+    io::stdin().read_line(&mut country).unwrap();
+
+    arr.insert(0, country.trim().to_string());
+    println!("The value of country: {}", country.trim());
+    println!("The given country name is successfully added to the list");
+}
+
+fn delete(arr:&mut Vec<String>){
+    println!("Enter which no. country to remove: ");
+    let mut removecountry = String::new();
+    io::stdin().read_line(&mut removecountry).unwrap();
+
+    let trimmed = removecountry.trim();
+    let remvnum = trimmed.parse::<usize>().unwrap();
+    println!("The following country has been removed: (number {}): {}", remvnum, arr[remvnum - 1]);
+    arr.remove(remvnum - 1);
 }
 
 fn main(){
@@ -24,20 +47,31 @@ fn main(){
     //for n in 1..100{
     //    println!("The value of n is: {}", n);
     //}
-    let mut countries = vec!["Nepal", "India", "Italy", "France", "USA"];
-    let mut num: isize = 1;
+    let mut countries = vec![
+    "Nepal".to_string(),
+    "India".to_string(),
+    "Italy".to_string(),
+    "France".to_string(),
+    "USA".to_string()
+    ];
 
-    show(&countries, &mut num);
+    show(&countries);
+
+    add(&mut countries);
    
+   /*
     println!("Enter a country name: ");
     let mut country = String::new();
     io::stdin().read_line(&mut country).unwrap();
     println!("The value of country: {}", country.trim());
     countries.insert(0, country.trim());
     println!("The given country name is successfully added to the list");
+    */
 
-    num = 1;
-    
-    show(&countries, &mut num);
+    show(&countries);
 
+    delete(&mut countries);
+
+
+    show(&countries);
 }
