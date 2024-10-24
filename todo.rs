@@ -54,7 +54,7 @@ fn done(arr: &mut Vec<String>, arr2: &mut Vec<String>) {
     }
     }
     else{
-        println!("There are no tasks to remove. Please add some tasks first.")
+        println!("There are no tasks in the list. Please add some tasks first.")
     }
 }
 
